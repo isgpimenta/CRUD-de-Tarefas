@@ -24,10 +24,11 @@ export default function Tasks() {
   const [dueDate, setDueDate] = useState<Date | undefined>();
 
   const fetchTasks = async () => {
-    const { data, error } = await supabase.from('tasks').select('*');
-    if (error) console.error(error);
-    else setTasks(data as Task[]);
-  };
+      const { data, error } = await supabase.from('tasks').select('*');
+      console.log('[Tasks] fetch response', { data, error });
+      if (error) console.error('[Tasks] fetch error', error);
+      else setTasks(data as Task[]);
+    };
 
   useEffect(() => {
     fetchTasks();
